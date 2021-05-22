@@ -14,8 +14,8 @@ def get_version():
     return version
 
 
-readme_name = "readme.md" if os.path.exists('readme.md') else "README.md"
-with open(readme_name, "r") as fh:
+readme_name = "readme.md" if os.path.exists("readme.md") else "README.md"
+with open("readme.md", "r") as fh:
     long_description = fh.read()
 
 setup(
