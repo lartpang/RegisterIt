@@ -145,3 +145,4 @@ class Registry(Iterable[Tuple[str, Any]]):
 
             if verbose:
                 print(f"Module:{name} has been imported!")
+
