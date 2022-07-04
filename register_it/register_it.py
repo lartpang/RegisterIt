@@ -120,13 +120,18 @@ class Registry(Iterable[Tuple[str, Any]]):
     @staticmethod
     def import_module_from_module_names(module_names, verbose=True):
         for name in module_names:
+            name_splits = name.split(".")[0]
+
+            to_import = True
             for _existing_module in sys.modules.keys():
-                _existing_module_splits = _existing_module.split(".")
-                name_splits = name.split(".")
-                if name_splits == _existing_module_splits[: len(name_splits)]:
+                _existing_module_splits = _existing_module.split(".")[0]
+                if _existing_module_splits == name_splits:
                     if verbose:
                         print(f"Module:{name} has been contained in sys.modules ({_existing_module}).")
-                    continue
+                    to_import = False
+                    break
+            if not to_import:
+                continue
 
             module_spec = importlib.util.find_spec(name)
             if module_spec is None:
